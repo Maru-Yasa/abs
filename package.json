@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "mongoose": "^6.0.6",
     "multer": "^1.4.3",
-    "node-telegram-bot-api": "^0.54.0"
+    "node-telegram-bot-api": "^0.54.0",
+    "requests": "^0.3.0"
   }
 }

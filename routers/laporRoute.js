@@ -4,6 +4,7 @@ const bot = require('../telegramBot')
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
+const requests = require('requests')
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, __dirname+'/uploads/')
@@ -31,11 +32,29 @@ const cpUpload = upload.array('bukti', 5)
 //   asal: 'SMK N 1 Bantul',
 //   korban: 'true',
 //   perlakuan: [ 'verbal', 'fisik' ] }
+
+const recaptcha = (req,res,next) => {  
+    if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
+        return res.json({"responseError" : "captcha error"})
+    }else{
+        // const secretKey = "*******";
+        // const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+        // request(verificationURL,function(error,response,body) {
+        //   body = JSON.parse(body);
+        //   if(body.success !== undefined && !body.success) {
+        //     return res.json({"responseError" : "Failed captcha verification"});
+        //   }
+        //   res.json({"responseSuccess" : "Sucess"});
+        // });
+        next()
+    }
+}
+
 router.route('/')
     .get((req,res) => {
         res.render('lapor')
     })
-    .post(cpUpload,async (req,res) => {
+    .post(cpUpload,recaptcha,async (req,res) => {
         let data = req.body
         let file;
         console.log(req.files)
@@ -54,6 +73,7 @@ Kelas : ${data.kelas}
 Asal : ${data.asal}
 Korban  : ${data.korban}
 Perlakuan : ${data.perlakuan}`
+
         await bot.sendMessage(-1001563082765,msg)
         if (file) {
             await bot.sendPhoto( -1001563082765,file)            
