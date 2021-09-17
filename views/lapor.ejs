@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('bootstrap') %>  
+    <title>ABS | Anti Bullying System</title>
+</head>
+<body>
+    <%- include('navbar') %>  
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-7 bg-white shadow my-5">
+                <div class="m-3">
+                    <div class="my-4">
+                        <h3 class="fw-bold">Buat laporan</h3>
+                    </div>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="my-4">
+                            <label for="exampleInputEmail1" class="form-label">Namamu :</label>
+                            <input type="text" class="form-control" id="" name="nama" aria-describedby="">
+                            <div id="emailHelp" class="form-text">Bila kamu ingin ini anonymouse maka tidak usah di isi tapi sebaiknya diisi agar proses berjalan dengan cepat dan lancar</div>
+                        </div>
+                        <div class="my-4">
+                            <h6 class="fs-5">Gendermu :</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" value="perempuan" id="flexRadioDefault1" c>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Perempuan
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" value="laki-laki" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Laki-laki
+                                </label>
+                              </div>
+                        </div>
+                        <div class="my-4">
+                            <label for="exampleInputEmail1" class="form-label">Kontakmu :</label>
+                            <input type="text" class="form-control" name="kontak" id="" aria-describedby="">
+                            <div id="emailHelp" class="form-text">Jika kamu mempunyai nomor telp / email yang bisa dihubungi, kami akan sangat terbantu bila anda mengisi ini</div>
+                        </div>
+                        <div class="my-4">
+                            <label for="exampleInputEmail1" class="form-label">Umurmu :</label>
+                            <input type="number" class="form-control" id="" name="umur" aria-describedby="">
+                            <div id="emailHelp" class="form-text">Bila kamu ingin ini anonymouse maka tidak usah di isi tapi sebaiknya diisi agar proses berjalan dengan cepat dan lancar</div>
+                        </div>
+                        <div class="my-4">
+                            <label for="exampleInputEmail1" class="form-label">Kelasmu :</label>
+                            <input type="text" class="form-control" name="kelas" id="" aria-describedby="">
+                            <div id="emailHelp" class="form-text">Bila kamu ingin ini anonymouse maka tidak usah di isi tapi sebaiknya diisi agar proses berjalan dengan cepat dan lancar</div>
+                        </div>
+                        <div class="my-4">
+                            <select class="form-select" name="asal" id="asal" onchange="asalHandler()" aria-label="Default select example" required>
+                                <option selected>Asal Sekolah</option>
+                                <option value="SMK N 1 Bantul">SMK N 1 Bantul</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                            <input type="text" class="form-control my-2" name="asal_lainnya" id="lain" placeholder="tulis sekolahmu disini" aria-describedby="" hidden disabled>
+                        </div>
+                        <div class="my-4">
+                            <h6 class="fs-5">Siapakah kamu?</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="korban" value="true" id="flexRadioDefault1" c>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Kamu adalah korban perundungan
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="korban" value="false" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Kamu melapor untuk temanmu
+                                </label>
+                              </div>
+                        </div>
+                        <div class="my-4">
+                            <h6 class="fs-5">Perlakuan oknum terhadapmu atau temanmu : </h6>
+                            <div class="form-check">
+                                <input class="form-check-input" name="perlakuan" type="checkbox" value="verbal" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <b>Verbal</b>, kamu dirundung dengan kata kata yang membuat hatimu sakit
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" name="perlakuan" type="checkbox" value="fisik" id="flexCheckChecked" >
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    <b>Fisik</b>, kamu dirundung dengan fisik yang membuat badanmu terasa sakit
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" name="perlakuan" type="checkbox" value="sexual" id="flexCheckChecked" >
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    <b>Sexual abuse</b>, kamu dilecehkan secara sexual
+                                </label>
+                              </div>
+                        </div>
+                        <div class="my-4">
+                          <h6 class="fs-5">Jika kalian memiliki bukti berupa foto bisa di upload disini</h6>
+                          <input type="file" class="form-control-file" name="bukti">
+                        </div>
+                        <div class="my-4">
+                            <button type="submit" class="btn fw-bold btn-primary">Lapor</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+  var asal = document.getElementById("asal")
+  var lainInput = document.getElementById('lain')
+
+  function asalHandler() {
+    if (asal.value === "lainnya") {
+      lainInput.disabled = false
+      lainInput.hidden = false
+      asal.name = ""
+      lainInput.name = "asal"
+    }
+  }
+
+</script>
+
+</body>
+</html>
