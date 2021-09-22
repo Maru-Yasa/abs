@@ -35,7 +35,8 @@ const cpUpload = upload.array('bukti', 5)
 
 const recaptcha = (req,res,next) => {  
     if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
-        return res.json({"responseError" : "captcha error"})
+        req.flash('msg','Error : Captcha error')
+        res.redirect('/lapor')
     }else{
         // const secretKey = "*******";
         // const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
@@ -52,7 +53,7 @@ const recaptcha = (req,res,next) => {
 
 router.route('/')
     .get((req,res) => {
-        res.render('lapor')
+        res.render('lapor',data=req.flash('msg'))
     })
     .post(cpUpload,recaptcha,async (req,res) => {
         let data = req.body
